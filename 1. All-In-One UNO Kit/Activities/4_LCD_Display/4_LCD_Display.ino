@@ -1,6 +1,6 @@
 /*
   =========================================================
-   Arduino UNO - 16x2 LCD (I2C) Display Program
+   Arduino UNO - 16x2 LCD (I2C) Display with Auto OFF
   =========================================================
 
   LIBRARIES USED:
@@ -28,6 +28,7 @@
   - Initializes the LCD using I2C communication
   - Displays a welcome message for 10 seconds
   - Clears the screen afterward
+  - Turns OFF both display content and backlight
 */
 
 // ==========================
@@ -49,7 +50,7 @@ void setup()
   // Start Serial communication for debugging
   Serial.begin(115200);
 
-  // Initialize I2C communication (uses A4 = SDA, A5 = SCL)
+  // Initialize I2C communication (A4 = SDA, A5 = SCL)
   Wire.begin();
 
   // ==========================
@@ -78,8 +79,18 @@ void setup()
   // Keep message visible for 10 seconds
   delay(10000);
 
+  // ==========================
+  // TURN OFF LCD
+  // ==========================
+
   // Clear LCD screen
   lcd.clear();
+
+  // Turn OFF display (characters disappear)
+  lcd.noDisplay();
+
+  // Turn OFF backlight (screen becomes completely dark)
+  lcd.setBacklight(0);
 }
 
 // ==========================
